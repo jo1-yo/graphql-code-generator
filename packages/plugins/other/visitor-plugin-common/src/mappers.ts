@@ -122,10 +122,10 @@ export function parseMapper(
       switch (mapperKind) {
         // ./my/module#Namespace#Identifier
         case MapperKind.Namespace: {
-          const [, ns, identifier] = items;
+          const [, ns, ...rest] = items;
 
           return {
-            type: `${ns}.${identifier}`,
+            type: [ns, ...rest].join('.'),
             importElement: ns,
           };
         }

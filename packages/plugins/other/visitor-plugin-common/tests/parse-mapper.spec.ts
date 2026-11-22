@@ -66,6 +66,18 @@ describe('parseMapper', () => {
     });
   });
 
+  it('Should support deeply nested namespaces', () => {
+    const result = parseMapper('aws-sdk#DynamoDB.DocumentClient.Key', 'MyScalar');
+
+    expect(result).toEqual({
+      default: false,
+      isExternal: true,
+      import: 'DynamoDB',
+      type: 'DynamoDB.DocumentClient.Key',
+      source: 'aws-sdk',
+    });
+  });
+
   it('Should support aliases', () => {
     const result = parseMapper('file#Type as SomeOtherType', 'SomeType');
 
